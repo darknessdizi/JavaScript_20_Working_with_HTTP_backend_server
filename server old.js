@@ -2,7 +2,7 @@
 const http = require('http'); // сначало импортируем http
 const path = require('path');
 const fs = require('fs');
-const uuid = require('uuid');
+const uuid = require('uuid'); // генерирует случайное id
 
 // koa-static позволяет назначить папку, которую мы будем раздавать по http как статические файлы
 const koaStatic = require('koa-static'); 
