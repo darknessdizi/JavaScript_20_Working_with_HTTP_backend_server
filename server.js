@@ -16,23 +16,22 @@ app.use(koaBody({ // чтобы обработать тело запроса (о
 
 app.use(async ctx => {
   const { method } = ctx.request.query;
-  console.log('текущий URL: ', ctx.url);
-  console.log('текущий query URL: ', ctx.request.query);
+  // console.log('текущий URL: ', ctx.url);
+  // console.log('текущий query URL: ', ctx.request.query);
   ctx.response.set('Access-Control-Allow-Origin', '*');
 
   switch (method) {
     case 'allTickets':
       ctx.response.body = data.tickets;
-      console.log('data', data);
       return;
     case 'ticketById':
       const { id } = ctx.request.query;
-      // ctx.response.body = data;
+      const task = data.getFullTicket(id);
+      ctx.response.body = task;
       return;
     case 'createTicket':
-      console.log('body', JSON.parse(ctx.request.body));
-      const obj = JSON.parse(ctx.request.body);
-      obj.id = uuid.v4();
+      const obj = ctx.request.body;
+      obj.id = uuid.v4(); // генерация "почти" уникального ID
       data.addNewTicket(obj);
       ctx.response.body = data.getTicket(obj.id);
       return;
