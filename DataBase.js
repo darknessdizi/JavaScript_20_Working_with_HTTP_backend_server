@@ -39,6 +39,19 @@ class DataBase {
     result.created = obj.created;
     return result; 
   }
+
+  changeStatus(id, status) {
+    // изменяет статус задачи в хранилище
+    const obj = this.getTicket(id);
+    obj.status = status;
+  }
+
+  deleteTicket(id) {
+    const obj = this.getTicket(id);
+    const index = this.tickets.indexOf(obj);
+    this.tickets.splice(index, 1);
+    this.ticketsFull.delete(id);
+  }
 }
 
 module.exports = {

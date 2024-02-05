@@ -17,15 +17,16 @@ app.use(koaBody({ // чтобы обработать тело запроса (о
 app.use(async ctx => {
   const { method } = ctx.request.query;
   // console.log('текущий URL: ', ctx.url);
-  // console.log('текущий query URL: ', ctx.request.query);
+  console.log('текущий query URL: ', ctx.request.query);
   ctx.response.set('Access-Control-Allow-Origin', '*');
+  const { id, status } = ctx.request.query;
 
   switch (method) {
     case 'allTickets':
       ctx.response.body = data.tickets;
       return;
     case 'ticketById':
-      const { id } = ctx.request.query;
+      console.log('ticketById');
       const task = data.getFullTicket(id);
       ctx.response.body = task;
       return;
@@ -34,6 +35,16 @@ app.use(async ctx => {
       obj.id = uuid.v4(); // генерация "почти" уникального ID
       data.addNewTicket(obj);
       ctx.response.body = data.getTicket(obj.id);
+      return;
+    case 'changeStatus':
+      console.log('changeStatus');
+      data.changeStatus(id, status);
+      ctx.response.body = 'Ok';
+      return;
+    case 'deleteTicket':
+      console.log('deleteTicket');
+      data.deleteTicket(id);
+      ctx.response.body = 'Ok';
       return;
     default:
       ctx.response.status = 404;
