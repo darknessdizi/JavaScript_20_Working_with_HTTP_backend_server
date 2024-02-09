@@ -1,6 +1,6 @@
 class Ticket {
 
-  constructor(id, name, status) {
+  constructor(id, name, status = 'false') {
     this.id = id; // идентификатор (уникальный в пределах системы)
     this.name = name; // краткое описание
     this.status = status; // boolean - сделано или нет

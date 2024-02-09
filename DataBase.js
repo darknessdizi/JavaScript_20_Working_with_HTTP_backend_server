@@ -19,7 +19,7 @@ class DataBase {
 
   addNewTicket(obj) {
     // добавляем новую задачу в хранилище
-    const ticket = new Ticket(obj.id, obj.name, obj.status);
+    const ticket = new Ticket(obj.id, obj.name);
     this.tickets.push(ticket);
 
     this.ticketsFull.set(obj.id, obj.description);
@@ -47,10 +47,21 @@ class DataBase {
   }
 
   deleteTicket(id) {
+    // удаляем задачу в хранилище
     const obj = this.getTicket(id);
     const index = this.tickets.indexOf(obj);
     this.tickets.splice(index, 1);
     this.ticketsFull.delete(id);
+  }
+
+  editTask(id, data) {
+    const obj = this.getTicket(id);
+    const index = this.tickets.indexOf(obj);
+    console.log('Замена имени', typeof data, 'Страроое ****', this.tickets[index]);
+    // this.tickets[index].status = obj.status;
+    this.tickets[index].name = data.name;
+    this.ticketsFull.delete(id);
+    this.ticketsFull.set(id, data.description);
   }
 }
 
