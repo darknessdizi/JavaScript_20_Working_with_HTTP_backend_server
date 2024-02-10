@@ -55,10 +55,9 @@ class DataBase {
   }
 
   editTask(id, data) {
+    // редактирование задачи
     const obj = this.getTicket(id);
     const index = this.tickets.indexOf(obj);
-    console.log('Замена имени', typeof data, 'Страроое ****', this.tickets[index]);
-    // this.tickets[index].status = obj.status;
     this.tickets[index].name = data.name;
     this.ticketsFull.delete(id);
     this.ticketsFull.set(id, data.description);
