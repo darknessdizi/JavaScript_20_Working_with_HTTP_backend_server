@@ -18,12 +18,13 @@ app.use(cors()); // настройки CORS по умолчанию
 //   })
 // );
 
-app.use(koaBody({ // чтобы обработать тело запроса (обязательно объявить до Middleware где работаем с body)
+app.use(koaBody({
+  // чтобы обработать тело запроса (обязательно объявить до Middleware где работаем с body)
   urlencoded: true, // иначе тело будет undefined (тело будет строкой)
   // multipart: true, // если тело запроса закодировано через FormData
 }));
 
-// app.use((ctx, next) => { // если не используем библиотеку @koa/cors 
+// app.use((ctx, next) => { // если не используем библиотеку @koa/cors
 //   // Обработка запроса типа preflight
 //   if (ctx.request.method !== 'OPTIONS') { // Для остальных методов
 //     next(); // сделать next и больше ничего
@@ -140,5 +141,5 @@ app.listen(port, (err) => {
     console.log(err);
     return;
   }
-  console.log('Server is listening to ' + port);
+  console.log(`Server is listening to ${port}`);
 });

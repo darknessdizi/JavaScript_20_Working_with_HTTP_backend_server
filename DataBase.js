@@ -1,4 +1,4 @@
-const { Ticket } = require('./Ticket'); 
+const { Ticket } = require('./Ticket');
 const { TicketFull } = require('./TicketFull');
 
 const firstTask = {
@@ -6,7 +6,7 @@ const firstTask = {
   name: 'Установить обновление КВ-ХХХ',
   description: 'Вышло критическое обновление для Windows, нужно поставить обновление в следующем приоритете:\n1. Сервера (не забыть сделать бэкап!)\n2. Рабочие станции',
   status: false,
-}
+};
 
 class DataBase {
   constructor() {
@@ -37,7 +37,7 @@ class DataBase {
     const description = this.ticketsFull.get(id);
     const result = new TicketFull(id, obj.name, obj.status, description);
     result.created = obj.created;
-    return result; 
+    return result;
   }
 
   changeStatus(id, status) {
@@ -65,5 +65,5 @@ class DataBase {
 }
 
 module.exports = {
-  DataBase
+  DataBase,
 };
